@@ -1,39 +1,53 @@
-import { ScrollView, View } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  View,
+} from "react-native";
 import { SafeLayout, TransactionCard } from "../core";
 import { transactions } from "@/data/transactionsTemplate";
 import { dateOptions } from "@/utils/dateUtils";
+import { LinearGradient } from "expo-linear-gradient";
 
 export const MyTransactionsScreen = () => {
   return (
-    <SafeLayout className="pt-16">
-      <ScrollView className="pb-14">
-        {transactions.map((transaction) => (
-          <View key={transaction.id} className="mt-4">
+    <SafeAreaView
+      className="flex-1 px-5 pt-20"
+      style={{ marginTop: StatusBar.currentHeight ?? 0 }}
+    >
+      <LinearGradient
+        className="absolute left-0 right-0 top-0 h-screen"
+        colors={["#DEF9FE", "#FFFCE3"]}
+      />
+
+      <FlatList
+        data={transactions}
+        renderItem={({ item }) => (
+          <View className="mt-4">
             <TransactionCard
-              label={transaction.label}
-              date={transaction.date.toLocaleDateString(
-                "en-US",
-                dateOptions as any
-              )}
-              value={transaction.value}
+              label={item.label}
+              date={item.date.toLocaleDateString("en-US", dateOptions as any)}
+              value={item.value}
               icon={
-                transaction.type === "income"
+                item.type === "income"
                   ? "CurrencyDecrease"
-                  : transaction.type === "shop"
+                  : item.type === "shop"
                     ? "ShoppingBag"
                     : "Exchange"
               }
               bgColor={
-                transaction.type === "income"
+                item.type === "income"
                   ? "primary"
-                  : transaction.type === "shop"
+                  : item.type === "shop"
                     ? "secondary"
                     : "warning"
               }
             />
           </View>
-        ))}
-      </ScrollView>
-    </SafeLayout>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
   );
 };
