@@ -5,7 +5,7 @@ import "react-native-reanimated";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function MyTransactionsLayout() {
+export default function WithdrawLayout() {
   return (
     <Stack screenOptions={{}}>
       <Stack.Screen
@@ -13,15 +13,7 @@ export default function MyTransactionsLayout() {
         options={{
           headerShown: true,
           headerTransparent: true,
-          headerTitle: "My Transactions",
-        }}
-      />
-      <Stack.Screen
-        name="detail"
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "Transaction Detail",
+          headerTitle: "Withdraw Funds",
         }}
       />
     </Stack>

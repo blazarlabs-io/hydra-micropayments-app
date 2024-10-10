@@ -26,7 +26,10 @@ export const TransactionCard = ({
 
   const Icon: any = Icons[icon as keyof typeof Icons];
   return (
-    <TouchableOpacity className="flex w-full flex-row items-center justify-between rounded-[48px] border p-2">
+    <TouchableOpacity
+      onPress={onPress}
+      className="flex w-full flex-row items-center justify-between rounded-[48px] border p-2"
+    >
       <View className="flex flex-row items-center justify-start gap-x-2">
         <View
           style={{
