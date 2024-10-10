@@ -18,6 +18,9 @@ import { Exchange } from "./Exchange";
 import { Wallet } from "./Wallet";
 import { Copy } from "./Copy";
 import { Close } from "./Close";
+import { Ada2 } from "./Ada2";
+import { Usdm2 } from "./Usdm2";
+import { Plus } from "./Plus";
 
 const Icons = {
   ViewEye,
@@ -40,6 +43,9 @@ const Icons = {
   Exchange,
   Copy,
   Close,
+  Ada2,
+  Usdm2,
+  Plus,
 };
 
 export { Icons };

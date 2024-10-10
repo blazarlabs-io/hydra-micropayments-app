@@ -46,6 +46,9 @@ export const MyTransactionsSection = () => {
                         ? "secondary"
                         : "warning"
                   }
+                  onPress={() =>
+                    router.push(`/my-transactions/detail/${transaction.id}`)
+                  }
                 />
               </View>
             )}

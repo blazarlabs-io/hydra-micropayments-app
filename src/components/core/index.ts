@@ -8,3 +8,4 @@ export { Icons } from "./Icon";
 export { TransactionCard } from "./Card/TransactionCard";
 export { BenefitCard } from "./Card/BenefitCard";
 export { AccountCard } from "./Card/AccountCard";
+export { Avatar } from "./Avatar/Avatar";

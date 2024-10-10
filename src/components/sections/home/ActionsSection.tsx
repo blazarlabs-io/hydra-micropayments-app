@@ -116,7 +116,7 @@ export const ActionsSection = () => {
             className="flex h-8 w-8 items-center justify-center rounded-[32px]"
             style={{ backgroundColor: Colors[theme].background }}
           >
-            <Icons.CurrencyIncrease />
+            <Icons.CurrencyIncrease size="24" />
           </View>
           <View className="w-20">
             <Text className="" style={{ color: Colors[theme].background }}>
@@ -125,6 +125,7 @@ export const ActionsSection = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => router.push("/withdraw")}
           className="flex h-[48px] w-[32%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
@@ -132,7 +133,7 @@ export const ActionsSection = () => {
             className="flex h-8 w-8 items-center justify-center rounded-[32px]"
             style={{ backgroundColor: Colors[theme].background }}
           >
-            <Icons.CurrencyDecrease />
+            <Icons.CurrencyDecrease size="24" />
           </View>
           <View className="w-20">
             <Text className="" style={{ color: Colors[theme].background }}>
@@ -148,7 +149,7 @@ export const ActionsSection = () => {
             className="flex h-8 w-8 items-center justify-center rounded-[32px]"
             style={{ backgroundColor: Colors[theme].background }}
           >
-            <Icons.MoneyBillFly />
+            <Icons.MoneyBillFly size="24" />
           </View>
           <View className="w-20">
             <Text className="" style={{ color: Colors[theme].background }}>
