@@ -13,6 +13,7 @@ export default function WithdrawLayout() {
         options={{
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: "center",
           headerTitle: "Withdraw Funds",
         }}
       />

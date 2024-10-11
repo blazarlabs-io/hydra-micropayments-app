@@ -14,6 +14,8 @@ export default function PrivateLayout() {
       <Stack.Screen name="home" options={{ headerShown: false }} />
       <Stack.Screen name="my-transactions" options={{ headerShown: false }} />
       <Stack.Screen name="withdraw" options={{ headerShown: false }} />
+      <Stack.Screen name="pay" options={{ headerShown: false }} />
+      <Stack.Screen name="benefits" options={{ headerShown: false }} />
     </Stack>
   );
 }

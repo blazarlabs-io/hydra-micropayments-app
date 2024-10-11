@@ -142,6 +142,7 @@ export const ActionsSection = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => router.push("/pay")}
           className="flex h-[48px] w-[32%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
