@@ -20,11 +20,14 @@ export const MyTransactionsSection = () => {
           </ThemedText>
         </TouchableOpacity>
       </View>
-      <View className="">
+      <View className="w-full">
         {transactions.map((transaction, index) => (
-          <View key={`transaction-${index}-${transaction.id}`}>
+          <View
+            key={`transaction-${index}-${transaction.id}`}
+            className="w-full"
+          >
             {index < 2 && (
-              <View className="mt-8">
+              <View className="mt-8 w-full">
                 <TransactionCard
                   label={transaction.label}
                   date={transaction.date.toLocaleDateString(

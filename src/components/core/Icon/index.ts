@@ -21,9 +21,25 @@ import { Close } from "./Close";
 import { Ada2 } from "./Ada2";
 import { Usdm2 } from "./Usdm2";
 import { Plus } from "./Plus";
+import { TopLeftFrame } from "./TopLeftFrame";
+import { BottomLeftFrame } from "./BottomLeftFrame";
+import { TopRightFrame } from "./TopRightFrame";
+import { BottomRightFrame } from "./BottomRightFrame";
+import { ChevronRight } from "./ChevronRight";
+import { Help } from "./Help";
+import { HelpMan } from "./HelpMan";
+import { SettingsCog } from "./SettingsCog";
+import { Logout } from "./Logout";
+import { Transfer } from "./Transfer";
+import { CameraFrame } from "./CameraFrame";
+import { Camera } from "./Camera";
+import { FlipCamera } from "./FlipCamera";
 
 const Icons = {
   ViewEye,
+  Camera,
+  FlipCamera,
+  Transfer,
   ViewEyeOff,
   ErrorCircle,
   Home,
@@ -46,6 +62,16 @@ const Icons = {
   Ada2,
   Usdm2,
   Plus,
+  TopLeftFrame,
+  BottomLeftFrame,
+  TopRightFrame,
+  BottomRightFrame,
+  ChevronRight,
+  Help,
+  HelpMan,
+  SettingsCog,
+  Logout,
+  CameraFrame,
 };
 
 export { Icons };

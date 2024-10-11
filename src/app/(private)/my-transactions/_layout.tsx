@@ -14,6 +14,7 @@ export default function MyTransactionsLayout() {
           headerShown: true,
           headerTransparent: true,
           headerTitle: "My Transactions",
+          headerTitleAlign: "center",
         }}
       />
       <Stack.Screen
@@ -22,6 +23,7 @@ export default function MyTransactionsLayout() {
           headerShown: true,
           headerTransparent: true,
           headerTitle: "Transaction Detail",
+          headerTitleAlign: "center",
         }}
       />
     </Stack>

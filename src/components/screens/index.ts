@@ -5,3 +5,7 @@ export { UserProfileScreen } from "./UserProfileScreen";
 export { MyTransactionsScreen } from "./MyTransactionsScreen";
 export { TransactionDetailScreen } from "./TransactionDetailScreen";
 export { WithdrawScreen } from "./WithdrawScreen";
+export { PayScreen } from "./PayScreen";
+export { ScanScreen } from "./ScanScreen";
+export { AdaStakingScreen } from "./AdaStakingScreen";
+export { ExchangeScreen } from "./ExchangeScreen";

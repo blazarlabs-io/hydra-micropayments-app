@@ -1,20 +1,18 @@
 import {
-  GoogleIcon,
   Button,
+  GoogleIcon,
+  Icons,
+  Input,
   SafeLayout,
   ThemedText,
-  Input,
   ThemedView,
-  Icons,
 } from "@/components/core";
 import { Colors } from "@/constants/Colors";
 import { auth } from "@/lib/firebase/client";
-import { login } from "@/lib/firebase/services/auth";
 import { firebaseAuthErrors } from "@/utils/firebaseAuthErrors";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Image, Modal, Pressable, View } from "react-native";
-import { useColorScheme } from "react-native";
+import { Image, Modal, useColorScheme, View } from "react-native";
 
 export const GetStartedScreen = () => {
   // * HOOKS

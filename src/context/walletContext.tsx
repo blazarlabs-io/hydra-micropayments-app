@@ -11,7 +11,7 @@ interface ContextInterface {
 
 const WalletContext = createContext<ContextInterface>({
   adaBalance: 10704.32,
-  adaConversionRate: 0.28,
+  adaConversionRate: 0.35,
   usdmBalance: 2789.0,
   usdmConversionRate: 1.0,
   selectedCurrency: "ADA",
@@ -32,7 +32,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedCurrency, setSelectedCurrency] = useState<"ADA" | "USDM">(
     "ADA"
   );
-  const [adaConversionRate, setAdaConversionRate] = useState<number>(0.28);
+  const [adaConversionRate, setAdaConversionRate] = useState<number>(0.35);
   const [usdmConversionRate, setUsdmConversionRate] = useState<number>(1.0);
 
   const updateSelectedCurrency = (currency: "ADA" | "USDM") => {

@@ -15,7 +15,7 @@ export const SafeLayout = ({ children, className }: SafeLayoutProps) => {
         className="absolute left-0 right-0 top-0 h-screen"
         colors={["#DEF9FE", "#FFFCE3"]}
       />
-      <ScrollView className="flex-1 bg-transparent">{children}</ScrollView>
+      {children}
     </SafeAreaView>
   );
 };

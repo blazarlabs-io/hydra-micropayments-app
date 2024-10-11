@@ -11,7 +11,7 @@ export interface AvatarProps {
 
 export const Avatar = ({
   image,
-  size = 40,
+  size = 48,
   name = "John Doe",
 }: AvatarProps) => {
   const theme = useColorScheme() ?? "light";
@@ -33,16 +33,24 @@ export const Avatar = ({
   }, [name]);
   return (
     <TouchableOpacity
-      onPress={() => console.log("Pressed")}
+      onPress={() => {}}
       style={{
         backgroundColor: Colors[theme].foreground,
+        width: size,
+        height: size,
       }}
-      className="flex h-12 w-12 items-center justify-center rounded-full"
+      className="flex items-center justify-center rounded-full"
     >
       {image === null || image === undefined ? (
-        <Text style={{ color: Colors[theme].background }}>{initials}</Text>
+        <Text className="text-xl" style={{ color: Colors[theme].background }}>
+          {initials}
+        </Text>
       ) : (
-        <Image source={{ uri: image }} className="h-12 w-12 rounded-full" />
+        <Image
+          source={{ uri: image }}
+          style={{ width: size, height: size }}
+          className="rounded-full"
+        />
       )}
     </TouchableOpacity>
   );

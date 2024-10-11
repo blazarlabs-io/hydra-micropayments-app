@@ -1,12 +1,14 @@
 import { Icons } from "@/components/core";
 import { HomeHeader } from "@/components/navigation";
+import { Colors } from "@/constants/Colors";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "blue",
+        tabBarActiveTintColor: Colors.light.primary,
+        tabBarInactiveTintColor: Colors.light.foreground,
         header: ({ route }) => {
           if (route.name !== "index") {
             return null;
@@ -23,7 +25,7 @@ export default function TabLayout() {
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},
-          tabBarIcon: ({ color }) => <Icons.Home />,
+          tabBarIcon: ({ color }) => <Icons.Home color={color} />,
           tabBarStyle: {
             paddingTop: 10,
             height: 60,
@@ -37,7 +39,7 @@ export default function TabLayout() {
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},
-          tabBarIcon: ({ color }) => <Icons.Nfc />,
+          tabBarIcon: ({ color }) => <Icons.Nfc color={color} />,
           tabBarStyle: {
             paddingTop: 10,
             height: 60,
@@ -51,7 +53,7 @@ export default function TabLayout() {
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},
-          tabBarIcon: ({ color }) => <Icons.UserProfile />,
+          tabBarIcon: ({ color }) => <Icons.UserProfile color={color} />,
           tabBarStyle: {
             paddingTop: 10,
             height: 60,
