@@ -1,6 +1,6 @@
 import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
 import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Icons, ThemedText } from "../core";
 
