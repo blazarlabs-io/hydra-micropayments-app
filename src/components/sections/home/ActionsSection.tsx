@@ -109,7 +109,7 @@ export const ActionsSection = () => {
       <View className="flex w-full flex-row items-center justify-between px-2">
         <TouchableOpacity
           onPress={handleOpenBottomSheet}
-          className="flex h-[48px] w-[32%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
+          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
           <View
@@ -126,7 +126,7 @@ export const ActionsSection = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => router.push("/withdraw")}
-          className="flex h-[48px] w-[32%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
+          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
           <View
@@ -143,7 +143,7 @@ export const ActionsSection = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => router.push("/pay")}
-          className="flex h-[48px] w-[32%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
+          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
           <View

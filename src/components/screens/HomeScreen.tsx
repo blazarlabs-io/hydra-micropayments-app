@@ -1,4 +1,4 @@
-import { useColorScheme, View } from "react-native";
+import { ScrollView, useColorScheme, View } from "react-native";
 import { SafeLayout } from "../core";
 import {
   ActionsSection,
@@ -11,18 +11,20 @@ export const HomeScreen = () => {
   const theme = useColorScheme() ?? "light";
   return (
     <SafeLayout>
-      <View className="mt-20">
-        <BalanceInfo />
-      </View>
-      <View className="mt-8">
-        <ActionsSection />
-      </View>
-      <View className="mt-8">
-        <MyTransactionsSection />
-      </View>
-      <View className="mt-8">
-        <BenefitsSection />
-      </View>
+      <ScrollView>
+        <View className="mt-20">
+          <BalanceInfo />
+        </View>
+        <View className="mt-8">
+          <ActionsSection />
+        </View>
+        <View className="mt-8">
+          <MyTransactionsSection />
+        </View>
+        <View className="mt-8">
+          <BenefitsSection />
+        </View>
+      </ScrollView>
     </SafeLayout>
   );
 };

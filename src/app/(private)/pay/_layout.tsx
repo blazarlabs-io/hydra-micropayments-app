@@ -1,7 +1,7 @@
-import { ScanButton } from "@/components/core";
+import { Icons, ScanButton } from "@/components/core";
 import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import "react-native-reanimated";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -20,6 +20,13 @@ export default function PayLayout() {
           headerRight: () => (
             <View className="">
               <ScanButton onPress={() => router.push("/pay/scan")} />
+            </View>
+          ),
+          headerLeft: () => (
+            <View className="">
+              <TouchableOpacity onPress={() => router.back()}>
+                <Icons.ChevronLeft size="24" />
+              </TouchableOpacity>
             </View>
           ),
         }}

@@ -1,5 +1,7 @@
-import { Stack } from "expo-router";
+import { Icons } from "@/components/core";
+import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { View, TouchableOpacity } from "react-native";
 import "react-native-reanimated";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -15,6 +17,13 @@ export default function WithdrawLayout() {
           headerTransparent: true,
           headerTitleAlign: "center",
           headerTitle: "Withdraw Funds",
+          headerLeft: () => (
+            <View className="">
+              <TouchableOpacity onPress={() => router.back()}>
+                <Icons.ChevronLeft size="24" />
+              </TouchableOpacity>
+            </View>
+          ),
         }}
       />
     </Stack>

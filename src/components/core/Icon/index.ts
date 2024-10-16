@@ -34,6 +34,7 @@ import { Transfer } from "./Transfer";
 import { CameraFrame } from "./CameraFrame";
 import { Camera } from "./Camera";
 import { FlipCamera } from "./FlipCamera";
+import { ChevronLeft } from "./ChevronLeft";
 
 const Icons = {
   ViewEye,
@@ -72,6 +73,7 @@ const Icons = {
   SettingsCog,
   Logout,
   CameraFrame,
+  ChevronLeft,
 };
 
 export { Icons };

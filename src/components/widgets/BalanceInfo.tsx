@@ -20,8 +20,8 @@ export const BalanceInfo = () => {
         <View className="flex flex-col items-center justify-center">
           <View className="flex flex-row items-center justify-start gap-x-1 px-6 pt-8">
             <Icons.AdaIcon />
-            <Text className="text-xl font-bold">$3,617.00</Text>
-            <Text className="pl-1 text-sm font-black opacity-50">ADA</Text>
+            <Text className="text-lg font-bold">$3,617.00</Text>
+            {/* <Text className="pl-1 text-xs font-black opacity-50">ADA</Text> */}
           </View>
           <View className="flex flex-row items-center justify-start gap-x-1 px-6 opacity-50">
             <Text className="text-sm font-normal">$828.00</Text>
@@ -31,8 +31,8 @@ export const BalanceInfo = () => {
         <View className="flex flex-col items-center justify-center">
           <View className="flex flex-row items-center justify-start gap-x-1 px-6 pt-8">
             <Icons.UsdmIcon />
-            <Text className="text-xl font-bold">$2,789.00</Text>
-            <Text className="pl-1 text-sm font-black opacity-50">USDM</Text>
+            <Text className="text-lg font-bold">$2,789.00</Text>
+            {/* <Text className="pl-1 text-xs font-black opacity-50">USDM</Text> */}
           </View>
           <View className="flex flex-row items-center justify-start gap-x-1 px-6 opacity-50">
             <Text className="text-sm font-normal">$2,789.00</Text>

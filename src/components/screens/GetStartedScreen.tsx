@@ -12,7 +12,7 @@ import { auth } from "@/lib/firebase/client";
 import { firebaseAuthErrors } from "@/utils/firebaseAuthErrors";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Image, Modal, useColorScheme, View } from "react-native";
+import { Image, Modal, ScrollView, useColorScheme, View } from "react-native";
 
 export const GetStartedScreen = () => {
   // * HOOKS
@@ -75,74 +75,76 @@ export const GetStartedScreen = () => {
         </View>
       </Modal>
       {/* * MODAL END */}
-      <View className="flex h-full w-full flex-col items-center justify-start bg-transparent">
-        <View className="mt-8 w-full">
-          <Image
-            source={require("@/assets/images/money-transfer.png")}
-            style={{ width: 340, height: 200 }}
-            resizeMode="contain"
-          />
-        </View>
-        <View className="w-full gap-y-3">
-          <View className="flex w-full flex-col items-center justify-center">
-            <ThemedText type="defaultSemiBold">Welcome to</ThemedText>
+      <ScrollView>
+        <View className="flex h-full w-full flex-col items-center justify-start bg-transparent">
+          <View className="mt-8 w-full">
             <Image
-              source={require("@/assets/images/hydrapay.png")}
-              className=""
-              style={{ width: 200, height: 64 }}
+              source={require("@/assets/images/money-transfer.png")}
+              style={{ width: 340, height: 200 }}
               resizeMode="contain"
             />
           </View>
-          <View className="flex w-full items-center justify-center py-4">
-            <Button
-              label="Continue with Google"
-              variant="outline"
-              icon={GoogleIcon}
-            />
-          </View>
-          <View className="flex w-full flex-row items-center justify-center gap-x-2">
-            <View className="h-[1px] grow bg-gray-300" />
-            <ThemedText type="default" className="opacity-70">
-              Or continue with
-            </ThemedText>
-            <View className="h-[1px] grow bg-gray-300" />
-          </View>
-          <View className="flex w-full items-center justify-center">
-            <View className="w-full">
-              <Input
-                placeholder="Email"
-                type="email"
-                value={email}
-                onValueChange={(value) => setEmail(value)}
+          <View className="w-full gap-y-3">
+            <View className="flex w-full flex-col items-center justify-center">
+              <ThemedText type="defaultSemiBold">Welcome to</ThemedText>
+              <Image
+                source={require("@/assets/images/hydrapay.png")}
+                className=""
+                style={{ width: 200, height: 64 }}
+                resizeMode="contain"
               />
             </View>
-            <View className="mt-4 w-full">
-              <Input
-                placeholder="Password"
-                type="password"
-                value={password}
-                onValueChange={(value) => setPassword(value)}
+            <View className="flex w-full items-center justify-center py-4">
+              <Button
+                label="Continue with Google"
+                variant="outline"
+                icon={GoogleIcon}
               />
             </View>
-          </View>
-          <View>
-            <Button label="Forgot Password?" variant="ghost" />
-          </View>
-          <View className="mt-4 flex w-full items-center justify-center">
-            <Button
-              label="Continue"
-              variant="primary"
-              onPress={() => handleSignIn()}
-            />
-          </View>
-          <View className="flex flex-row items-center justify-center">
-            <ThemedText type="default" className="opacity-70">
-              Don't have an account?
-            </ThemedText>
-            <Button label="Sign up" variant="ghost" fullWidth={false} />
+            <View className="flex w-full flex-row items-center justify-center gap-x-2">
+              <View className="h-[1px] grow bg-gray-300" />
+              <ThemedText type="default" className="opacity-70">
+                Or continue with
+              </ThemedText>
+              <View className="h-[1px] grow bg-gray-300" />
+            </View>
+            <View className="flex w-full items-center justify-center">
+              <View className="w-full">
+                <Input
+                  placeholder="Email"
+                  type="email"
+                  value={email}
+                  onValueChange={(value) => setEmail(value)}
+                />
+              </View>
+              <View className="mt-4 w-full">
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  value={password}
+                  onValueChange={(value) => setPassword(value)}
+                />
+              </View>
+            </View>
+            <View>
+              <Button label="Forgot Password?" variant="ghost" />
+            </View>
+            <View className="mt-4 flex w-full items-center justify-center">
+              <Button
+                label="Continue"
+                variant="primary"
+                onPress={() => handleSignIn()}
+              />
+            </View>
+            <View className="flex flex-row items-center justify-center">
+              <ThemedText type="default" className="opacity-70">
+                Don't have an account?
+              </ThemedText>
+              <Button label="Sign up" variant="ghost" fullWidth={false} />
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeLayout>
   );
 };
