@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { getAdaUsdTicker } from "@/services/coinwatch/client";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface ContextInterface {
   adaBalance: number;
@@ -10,9 +11,9 @@ interface ContextInterface {
 }
 
 const WalletContext = createContext<ContextInterface>({
-  adaBalance: 10704.32,
+  adaBalance: 0.0,
   adaConversionRate: 0.35,
-  usdmBalance: 2789.0,
+  usdmBalance: 0.0,
   usdmConversionRate: 1.0,
   selectedCurrency: "ADA",
   updateSelectedCurrency: () => {},
@@ -27,8 +28,8 @@ export const useWallet = () => {
 };
 
 export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
-  const [adaBalance, setAdaBalance] = useState<number>(10704.32);
-  const [usdmBalance, setUsdmBalance] = useState<number>(2789.01);
+  const [adaBalance, setAdaBalance] = useState<number>(640.0);
+  const [usdmBalance, setUsdmBalance] = useState<number>(0.0);
   const [selectedCurrency, setSelectedCurrency] = useState<"ADA" | "USDM">(
     "ADA"
   );
@@ -38,6 +39,16 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
   const updateSelectedCurrency = (currency: "ADA" | "USDM") => {
     setSelectedCurrency(currency);
   };
+
+  useEffect(() => {
+    getAdaUsdTicker()
+      .then((data) => {
+        setAdaConversionRate(data.rate);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <WalletContext.Provider

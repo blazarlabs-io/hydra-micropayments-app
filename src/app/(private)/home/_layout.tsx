@@ -2,6 +2,7 @@ import { Icons } from "@/components/core";
 import { HomeHeader } from "@/components/navigation";
 import { Colors } from "@/constants/Colors";
 import { Tabs } from "expo-router";
+import { View } from "react-native";
 
 export default function TabLayout() {
   return (
@@ -9,6 +10,8 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors.light.primary,
         tabBarInactiveTintColor: Colors.light.foreground,
+        tabBarActiveBackgroundColor: Colors.light.background,
+        tabBarInactiveBackgroundColor: Colors.light.background,
         header: ({ route }) => {
           if (route.name !== "index") {
             return null;
@@ -25,9 +28,13 @@ export default function TabLayout() {
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},
-          tabBarIcon: ({ color }) => <Icons.Home color={color} />,
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 10 }}>
+              <Icons.Home color={color} />
+            </View>
+          ),
           tabBarStyle: {
-            paddingTop: 10,
+            // paddingTop: 10,
             height: 60,
           },
         }}
@@ -35,13 +42,17 @@ export default function TabLayout() {
       <Tabs.Screen
         name="nfc"
         options={{
-          title: "Nfc",
+          title: "Pay",
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},
-          tabBarIcon: ({ color }) => <Icons.Nfc color={color} />,
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 10 }}>
+              <Icons.Payment color={color} />
+            </View>
+          ),
           tabBarStyle: {
-            paddingTop: 10,
+            // paddingTop: 10,
             height: 60,
           },
         }}
@@ -53,9 +64,13 @@ export default function TabLayout() {
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},
-          tabBarIcon: ({ color }) => <Icons.UserProfile color={color} />,
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 10 }}>
+              <Icons.UserProfile color={color} />
+            </View>
+          ),
           tabBarStyle: {
-            paddingTop: 10,
+            // paddingTop: 10,
             height: 60,
           },
         }}

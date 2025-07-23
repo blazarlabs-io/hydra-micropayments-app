@@ -13,14 +13,20 @@
       "backgroundColor": "#73DEF0"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.blazarlabs.hydrapay"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#73DEF0"
       },
-      "package": "com.blazarlabs.hydrapay"
+      "package": "com.blazarlabs.hydrapay",
+      "permissions": [
+        "android.permission.NFC",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -28,6 +34,7 @@
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
+      "react-native-ble-plx",
       "expo-router",
       [
         "expo-camera",
@@ -40,6 +47,10 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#ffffff",
+      "translucent": true
     }
   }
 }
