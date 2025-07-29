@@ -6,11 +6,13 @@ import {
   MyTransactionsSection,
 } from "../sections";
 import { BalanceInfo } from "../widgets";
+import { StatusBar } from "expo-status-bar";
 
 export const HomeScreen = () => {
   const theme = useColorScheme() ?? "light";
   return (
     <SafeLayout>
+      <StatusBar style="dark" />
       <ScrollView>
         <View className="mt-20">
           <BalanceInfo />

@@ -1,6 +1,7 @@
 import { Alert, PermissionsAndroid, Platform } from "react-native";
 import { BleManager } from "react-native-ble-plx";
 import BluetoothStateManager from "react-native-bluetooth-state-manager";
+import { Buffer } from "buffer";
 
 export class BleClient {
   // Properties
@@ -92,7 +93,7 @@ export class BleClient {
         } else {
           if (
             device?.name === name &&
-            this.calculateDistance(-59, 2, device.rssi) <= 0.2
+            this.calculateDistance(-59, 2, device.rssi) <= 0.05
           ) {
             console.log(this.calculateDistance(-59, 2, device.rssi));
             // * Stop scanning as it's not necessary if you are scanning for one device
@@ -106,36 +107,45 @@ export class BleClient {
                   await device.discoverAllServicesAndCharacteristics();
 
                   // * Read address characteristic
-                  const addressCharacteristic =
+                  const value1Characteristic =
                     await device.readCharacteristicForService(
                       serviceOptions.SERVICE_UUID,
-                      serviceOptions.ADDRESS_CHARACTERISTIC_UUID
+                      serviceOptions.VALUE1_CHARACTERISTIC_UUID
                     );
 
                   // * Read value characteristic
-                  const valueCharacteristic =
+                  const value2Characteristic =
                     await device.readCharacteristicForService(
                       serviceOptions.SERVICE_UUID,
-                      serviceOptions.VALUE_CHARACTERISTIC_UUID
+                      serviceOptions.VALUE2_CHARACTERISTIC_UUID
                     );
 
                   // * Convert to base64
-                  const address = atob(addressCharacteristic.value as string);
-                  const value = atob(valueCharacteristic.value as string);
+                  const value1 = atob(value1Characteristic.value);
+                  const value2 = atob(value2Characteristic.value);
+
+                  console.log(
+                    "\n [RECEIVED CHARACTERISTICS]",
+                    value1Characteristic,
+                    value2Characteristic,
+                    value1,
+                    value2
+                  );
 
                   // * RESPOND TO BEACON BY WRITING RESPONSE CHARACTERISTIC
-                  const res =
-                    await device.writeCharacteristicWithResponseForService(
-                      serviceOptions.SERVICE_UUID,
-                      serviceOptions.RESPONSE_CHARACTERISTIC_UUID,
-                      btoa("200")
-                    );
+                  // const res =
+                  //   await device.writeCharacteristicWithResponseForService(
+                  //     serviceOptions.SERVICE_UUID,
+                  //     serviceOptions.RESPONSE_CHARACTERISTIC_UUID,
+                  //     btoa("200")
+                  //   );
 
                   // * Disconnect
-                  if (device.isConnected()) device.cancelConnection();
+                  // if (device.isConnected()) device.cancelConnection();
                   resolve({
-                    address,
-                    value,
+                    value1,
+                    value2,
+                    device,
                   });
                 } catch (error) {
                   reject(error);
@@ -150,4 +160,49 @@ export class BleClient {
       });
     });
   }
+
+  writeToCharacteristic = async (
+    device: any,
+    SERVICE_UUID: string,
+    WRITE_CHAR_UUID: string,
+    message: string
+  ) => {
+    if (!device) return;
+
+    try {
+      const services = await device.services();
+      for (const service of services) {
+        if (service.uuid.toLowerCase() === SERVICE_UUID.toLowerCase()) {
+          const characteristics = await service.characteristics();
+
+          characteristics.forEach((char: any) => {
+            console.log("\n\n\n===========================");
+            console.log("Name:", char);
+            console.log("UUID:", char.uuid);
+            console.log("Properties:", char.properties); // 👈 Asegúrate que incluya 'WriteWithResponse'
+            console.log("===========================\n\n\n");
+          });
+
+          const char = characteristics.find(
+            (c: any) => c.uuid.toLowerCase() === WRITE_CHAR_UUID.toLowerCase()
+          );
+
+          if (char) {
+            const base64Data = Buffer.from(message, "utf8").toString("base64");
+
+            await device.writeCharacteristicWithResponseForService(
+              SERVICE_UUID,
+              WRITE_CHAR_UUID,
+              base64Data
+            );
+            console.log("✅ Data written:", message);
+          } else {
+            console.warn("❌ Write characteristic not found");
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Write failed:", err);
+    }
+  };
 }

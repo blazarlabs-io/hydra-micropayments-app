@@ -16,6 +16,11 @@ export default function PrivateLayout() {
       <Stack.Screen name="withdraw" options={{ headerShown: false }} />
       <Stack.Screen name="pay" options={{ headerShown: false }} />
       <Stack.Screen name="benefits" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="wallet-registration"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="payment-success" options={{ headerShown: false }} />
     </Stack>
   );
 }

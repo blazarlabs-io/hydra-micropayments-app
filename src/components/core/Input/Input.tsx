@@ -5,7 +5,7 @@ import { Icons } from "../Icon";
 
 export interface InputProps {
   placeholder?: string;
-  type: "email" | "password";
+  type: "email" | "password" | "text";
   className?: string;
   onValueChange?: (value: string) => void;
   value: string;
@@ -26,6 +26,14 @@ export const Input = ({
 
   return (
     <>
+      {type === "text" && (
+        <TextInput
+          placeholder={placeholder}
+          className={cn("h-12 w-full rounded-[32px] border px-4", className)}
+          onChangeText={onValueChange}
+          value={value}
+        />
+      )}
       {type === "email" && (
         <TextInput
           placeholder={placeholder}

@@ -42,7 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="nfc"
         options={{
-          title: "Pay",
+          title: "Nfc",
           tabBarLabel: "",
           headerTransparent: true,
           headerStyle: {},

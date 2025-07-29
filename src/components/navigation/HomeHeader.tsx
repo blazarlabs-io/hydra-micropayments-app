@@ -11,7 +11,11 @@ export const HomeHeader = () => {
     <SafeAreaView>
       <View className="flex-row items-center justify-between px-5 py-4">
         <Icons.Hamburger />
-        <Avatar name={user?.email as string} image={user?.photoURL as string} />
+        <Avatar
+          name={user?.email as string}
+          image={user?.photoURL as string}
+          size={40}
+        />
       </View>
     </SafeAreaView>
   );

@@ -3,9 +3,9 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --tunnel",
     "reset-project": "node ./src/scripts/reset-project.js",
-    "android": "expo run:android",
+    "android": "npx expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
@@ -16,11 +16,14 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
-    "@react-native-async-storage/async-storage": "^1.24.0",
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-clipboard/clipboard": "^1.16.3",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.0.2",
+    "buffer": "^6.0.3",
     "clsx": "^2.1.1",
     "expo": "~51.0.39",
+    "expo-auth-session": "~5.5.2",
     "expo-camera": "~15.0.16",
     "expo-clipboard": "~6.0.3",
     "expo-constants": "~16.0.2",
@@ -46,7 +49,7 @@
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10",
     "tailwind-merge": "^2.5.3",
-    "react-native-cardano": "https://github.com/Emurgo/react-native-cardano.git"
+    "toastify-react-native": "^7.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

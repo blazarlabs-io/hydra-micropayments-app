@@ -20,7 +20,7 @@ export const BenefitsSection = () => {
         </TouchableOpacity>
       </View>
       <View className="w-full">
-        <View className="mt-8 flex w-full flex-row items-center justify-between">
+        <View style={{}} className="mt-8">
           <BenefitCard
             icon="ShoppingBag"
             label="Shop"

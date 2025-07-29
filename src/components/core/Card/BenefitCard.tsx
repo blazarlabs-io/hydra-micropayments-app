@@ -26,7 +26,7 @@ export const BenefitCard = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="w-ful min-h-[96px] min-w-[96px] rounded-[16px] border p-2"
+      className="min-h-[96px] min-w-[96px] max-w-[96px] rounded-[16px] border border-red-500 p-2"
       style={{
         backgroundColor: Colors[theme][bgColor as ColorKey],
       }}

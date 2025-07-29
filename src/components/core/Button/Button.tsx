@@ -16,6 +16,7 @@ export interface ButtonProps {
   fullWidth?: boolean;
   icon?: any;
   className?: string;
+  disabled?: boolean;
 }
 
 export const Button = ({
@@ -26,6 +27,7 @@ export const Button = ({
   fullWidth = true,
   icon,
   className,
+  disabled = false,
 }: ButtonProps) => {
   const theme = useColorScheme() ?? "light";
 
@@ -34,12 +36,18 @@ export const Button = ({
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: Colors[theme].primary,
-      color: Colors[theme]["primary-foreground"],
+      backgroundColor: !disabled
+        ? Colors[theme].primary
+        : Colors[theme]["muted"],
+      color: !disabled
+        ? Colors[theme]["primary-foreground"]
+        : Colors[theme]["muted"],
       paddingHorizontal: size === "sm" ? 16 : size === "md" ? 24 : 32,
       paddingVertical: size === "sm" ? 8 : size === "md" ? 12 : 16,
       borderRadius: 32,
-      borderColor: Colors[theme]["primary-foreground"],
+      borderColor: !disabled
+        ? Colors[theme]["primary-foreground"]
+        : Colors[theme]["muted"],
       borderWidth: 1,
       width: fullWidth ? "100%" : undefined,
     },
@@ -95,6 +103,7 @@ export const Button = ({
         variant === "ghost" && styles.ghost,
         variant === "link" && styles.link,
       ]}
+      disabled={disabled}
     >
       {icon && (
         <View className="absolute left-4">

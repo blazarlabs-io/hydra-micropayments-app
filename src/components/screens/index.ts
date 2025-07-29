@@ -9,3 +9,6 @@ export { PayScreen } from "./PayScreen";
 export { ScanScreen } from "./ScanScreen";
 export { AdaStakingScreen } from "./AdaStakingScreen";
 export { ExchangeScreen } from "./ExchangeScreen";
+export { StepOne } from "./register-wallet/StepOne";
+export { StepTwo } from "./register-wallet/StepTwo";
+export { PaymentSuccessScreen } from "./PaymentSuccessScreen";

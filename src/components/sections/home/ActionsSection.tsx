@@ -109,7 +109,7 @@ export const ActionsSection = () => {
       <View className="flex w-full flex-row items-center justify-between px-2">
         <TouchableOpacity
           onPress={handleOpenBottomSheet}
-          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
+          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] pl-4"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
           <View
@@ -119,14 +119,17 @@ export const ActionsSection = () => {
             <Icons.CurrencyIncrease size="24" />
           </View>
           <View className="w-20">
-            <Text className="" style={{ color: Colors[theme].background }}>
+            <Text
+              className=""
+              style={{ color: Colors[theme].background, fontSize: 12 }}
+            >
               Topup
             </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => router.push("/withdraw")}
-          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
+          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-1 rounded-[32px] pl-4"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
           <View
@@ -136,14 +139,17 @@ export const ActionsSection = () => {
             <Icons.CurrencyDecrease size="24" />
           </View>
           <View className="w-20">
-            <Text className="" style={{ color: Colors[theme].background }}>
+            <Text
+              className=""
+              style={{ color: Colors[theme].background, fontSize: 12 }}
+            >
               Withdraw
             </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => router.push("/pay")}
-          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] px-[2px]"
+          className="flex h-[48px] w-[33%] flex-row items-center justify-center gap-x-2 rounded-[32px] pl-4"
           style={{ backgroundColor: Colors[theme].foreground }}
         >
           <View
@@ -153,7 +159,10 @@ export const ActionsSection = () => {
             <Icons.MoneyBillFly size="24" />
           </View>
           <View className="w-20">
-            <Text className="" style={{ color: Colors[theme].background }}>
+            <Text
+              className=""
+              style={{ color: Colors[theme].background, fontSize: 12 }}
+            >
               Pay
             </Text>
           </View>
