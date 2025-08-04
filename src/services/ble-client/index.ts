@@ -120,31 +120,33 @@ export class BleClient {
                       serviceOptions.VALUE2_CHARACTERISTIC_UUID
                     );
 
+                  // * Read value characteristic
+                  const value3Characteristic =
+                    await device.readCharacteristicForService(
+                      serviceOptions.SERVICE_UUID,
+                      serviceOptions.VALUE3_CHARACTERISTIC_UUID
+                    );
+
                   // * Convert to base64
                   const value1 = atob(value1Characteristic.value);
                   const value2 = atob(value2Characteristic.value);
+                  const value3 = atob(value3Characteristic.value);
 
                   console.log(
                     "\n [RECEIVED CHARACTERISTICS]",
                     value1Characteristic,
                     value2Characteristic,
                     value1,
-                    value2
+                    value2,
+                    value3
                   );
-
-                  // * RESPOND TO BEACON BY WRITING RESPONSE CHARACTERISTIC
-                  // const res =
-                  //   await device.writeCharacteristicWithResponseForService(
-                  //     serviceOptions.SERVICE_UUID,
-                  //     serviceOptions.RESPONSE_CHARACTERISTIC_UUID,
-                  //     btoa("200")
-                  //   );
 
                   // * Disconnect
                   // if (device.isConnected()) device.cancelConnection();
                   resolve({
                     value1,
                     value2,
+                    value3,
                     device,
                   });
                 } catch (error) {

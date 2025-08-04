@@ -7,25 +7,29 @@ import {
 } from "../sections";
 import { BalanceInfo } from "../widgets";
 import { StatusBar } from "expo-status-bar";
+import { Colors } from "@/constants/Colors";
 
 export const HomeScreen = () => {
   const theme = useColorScheme() ?? "light";
   return (
     <SafeLayout>
-      <StatusBar style="dark" />
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+        }}
+      >
         <View className="mt-20">
           <BalanceInfo />
         </View>
-        <View className="mt-8">
+        <View className="mt-6">
           <ActionsSection />
         </View>
-        <View className="mt-8">
+        <View className="mt-6">
           <MyTransactionsSection />
         </View>
-        <View className="mt-8">
+        <ScrollView className="mt-6 flex-1">
           <BenefitsSection />
-        </View>
+        </ScrollView>
       </ScrollView>
     </SafeLayout>
   );

@@ -2,6 +2,7 @@ import { TouchableOpacity, useColorScheme, View } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Icons } from "../Icon";
 import { ThemedText } from "../Text/ThemedText";
+import { cn } from "@/utils/cn";
 
 type ColorKey = keyof typeof Colors.light; // or keyof typeof Colors.dark
 
@@ -11,6 +12,7 @@ export interface BenefitCardProps {
   title: string;
   bgColor: ColorKey;
   onPress: () => void;
+  className?: string;
 }
 
 export const BenefitCard = ({
@@ -19,6 +21,7 @@ export const BenefitCard = ({
   title,
   bgColor,
   onPress,
+  className,
 }: BenefitCardProps) => {
   const theme = useColorScheme() ?? "light";
 
@@ -26,7 +29,10 @@ export const BenefitCard = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="min-h-[96px] min-w-[96px] max-w-[96px] rounded-[16px] border border-red-500 p-2"
+      className={cn(
+        "mt-2 min-h-[96px] min-w-[96px] rounded-[16px] border p-2",
+        className
+      )}
       style={{
         backgroundColor: Colors[theme][bgColor as ColorKey],
       }}

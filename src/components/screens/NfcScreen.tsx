@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
-import { Image, Modal, useColorScheme, View } from "react-native";
+import { Image, Modal, useColorScheme, View, Text } from "react-native";
 import { BleClient } from "../../services/ble-client";
 import { Button, Icons, SafeLayout, ThemedText, ThemedView } from "../core";
 import { useWalletRegistration } from "@/hooks/useWalletRegistration";
 import { Colors } from "@/constants/Colors";
 import { useRouter } from "expo-router";
 import { useWallet } from "@/context/walletContext";
+import { ASSET_UNITS } from "@/constants/assetUnits";
 
 const DEVICE_NAME = "Hydra TERM";
 const SERVICE_UUID = "1d4ddcb2-279d-42e2-a95a-274352a25248";
 const VALUE1_CHARACTERISTIC_UUID = "a781af9a-9a04-4422-9d78-9014497ccdc0";
 const VALUE2_CHARACTERISTIC_UUID = "61b64163-35fa-438a-810c-018d1a719667";
+const VALUE3_CHARACTERISTIC_UUID = "52f34145-0363-4f4e-9fab-a133e8e5b0b1";
 const WRITE1_CHARACTERISTIC_UUID = "9b16159d-7c3e-4ae6-990b-0d34f22389bb";
 
 export const NfcScreen = () => {
@@ -22,6 +24,7 @@ export const NfcScreen = () => {
   const [paymentRequest, setPaymentRequest] = useState<{
     address: string;
     amount: number;
+    assetUnit: string;
   } | null>(null);
   const [device, setDevice] = useState<any>(null);
   const [bleClient, setBleClient] = useState<BleClient | null>(null);
@@ -53,31 +56,31 @@ export const NfcScreen = () => {
 
     router.push("/payment-success");
 
-    try {
-      // const url = `${process.env.EXPO_PUBLIC_TXPIPE_API_URL?.toString()}/query-funds?address=${paymentRequest?.address.toString()}`;
-      // console.log("[URL]", url);
-      // const getFundsRes = await fetch(url, {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      // console.log("[getFundsRes]", getFundsRes);
-      // const hash = "";
-      // const index = 0;
-      // const payload = {
-      //   merchant_address: paymentRequest?.address,
-      //   funds_utxo_ref: {
-      //     // The output reference of the user's funds UTxO within the Hydra Head.
-      //     hash: hash,
-      //     index: index,
-      //   },
-      //   amount: (paymentRequest?.amount as number) * 1000000, // The amount of ADA (in Lovelace) to pay the merchant
-      //   signature: "",
-      // };
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const url = `${process.env.EXPO_PUBLIC_TXPIPE_API_URL?.toString()}/query-funds?address=${paymentRequest?.address.toString()}`;
+    //   console.log("[URL]", url);
+    //   const getFundsRes = await fetch(url, {
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   console.log("[getFundsRes]", getFundsRes);
+    //   const hash = "";
+    //   const index = 0;
+    //   const payload = {
+    //     merchant_address: paymentRequest?.address,
+    //     funds_utxo_ref: {
+    //       // The output reference of the user's funds UTxO within the Hydra Head.
+    //       hash: hash,
+    //       index: index,
+    //     },
+    //     amount: (paymentRequest?.amount as number) * 1000000, // The amount of ADA (in Lovelace) to pay the merchant
+    //     signature: "",
+    //   };
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }, [paymentRequest, device, bleClient, adaAddress]);
 
   useEffect(() => {
@@ -93,12 +96,14 @@ export const NfcScreen = () => {
               SERVICE_UUID,
               VALUE1_CHARACTERISTIC_UUID,
               VALUE2_CHARACTERISTIC_UUID,
+              VALUE3_CHARACTERISTIC_UUID,
             })
             .then((response) => {
               console.log("\n [CHARACTERISTICS VALUES]", response);
               const pr = {
                 address: response.value1,
                 amount: response.value2,
+                assetUnit: response.value3,
               };
               setPaymentRequest(() => pr);
               setDevice(() => response.device);
@@ -184,9 +189,31 @@ export const NfcScreen = () => {
               >
                 {paymentRequest.address}
               </ThemedText>
-              <ThemedText type="title" className="max-w-[70%] text-center">
-                ₳{paymentRequest.amount}
-              </ThemedText>
+              {paymentRequest && paymentRequest.assetUnit !== undefined && (
+                <>
+                  {paymentRequest.assetUnit === ASSET_UNITS.ada && (
+                    <ThemedText
+                      type="title"
+                      className="mt-8 max-w-[70%] text-center"
+                    >
+                      ₳{paymentRequest.amount / 1000000}
+                    </ThemedText>
+                  )}
+                  {paymentRequest.assetUnit === ASSET_UNITS.usdm && (
+                    <View className="flex flex-row items-start justify-center">
+                      <ThemedText
+                        type="title"
+                        className="mt-8 max-w-[70%] text-center"
+                      >
+                        ${paymentRequest.amount}
+                      </ThemedText>
+                      <Text className="ml-2 mt-8 max-w-[70%] text-center text-[10px] font-bold opacity-50">
+                        USDM
+                      </Text>
+                    </View>
+                  )}
+                </>
+              )}
             </View>
             <Button
               variant="primary"

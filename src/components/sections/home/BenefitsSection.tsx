@@ -3,11 +3,12 @@ import { View, TouchableOpacity } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "react-native";
 import { router } from "expo-router";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const BenefitsSection = () => {
   const theme = useColorScheme() ?? "light";
   return (
-    <View>
+    <View className="flex-1">
       <View className="flex flex-row items-center justify-between">
         <ThemedText className="font-bold">Benefits</ThemedText>
         <TouchableOpacity>
@@ -19,13 +20,18 @@ export const BenefitsSection = () => {
           </ThemedText>
         </TouchableOpacity>
       </View>
-      <View className="w-full">
-        <View style={{}} className="mt-8">
+      <View className="flex-1">
+        <View
+          style={{
+            flex: 1,
+          }}
+          className="mt-2"
+        >
           <BenefitCard
             icon="ShoppingBag"
             label="Shop"
             title="Rewards"
-            bgColor="warning"
+            bgColor="secondary"
             onPress={() => {}}
           />
           <BenefitCard

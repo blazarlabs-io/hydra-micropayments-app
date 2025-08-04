@@ -27,3 +27,13 @@ export type UserData = {
   type: UserType;
   wallet: HydraWallet;
 };
+
+export type Transaction = {
+  txHash: string;
+  oututIndex: number;
+  assets: {
+    [key: string]: number;
+  };
+  address: string;
+  datum: string;
+};

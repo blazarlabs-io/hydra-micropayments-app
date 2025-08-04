@@ -5,6 +5,8 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./authContext";
 import { USERS } from "@/lib/firebase/services/constants";
+import { ASSET_UNITS } from "@/constants/assetUnits";
+import { Transaction } from "@/types/db";
 
 interface ContextInterface {
   isWalletRegistered: boolean;
@@ -17,6 +19,7 @@ interface ContextInterface {
   usdmConversionRate: number;
   selectedCurrency: "ADA" | "USDM";
   updateSelectedCurrency: (currency: "ADA" | "USDM") => void;
+  transactions: Transaction[];
 }
 
 const WalletContext = createContext<ContextInterface>({
@@ -30,6 +33,7 @@ const WalletContext = createContext<ContextInterface>({
   usdmConversionRate: 1.0,
   selectedCurrency: "ADA",
   updateSelectedCurrency: () => {},
+  transactions: [],
 });
 
 export const useWallet = () => {
@@ -58,6 +62,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [adaConversionRate, setAdaConversionRate] = useState<number>(0.35);
   const [usdmConversionRate, setUsdmConversionRate] = useState<number>(1.0);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const updateSelectedCurrency = (currency: "ADA" | "USDM") => {
     setSelectedCurrency(currency);
@@ -99,8 +104,27 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       console.info("[GET-BALANCE]", adaAddress);
       getBalance()
         .then((data) => {
-          console.log("[QUERY-FUNDS]", data);
-          setAdaBalance(data.totalInL2 / 1000000);
+          console.log(
+            "\n\n[QUERY-FUNDS]",
+            JSON.stringify(data, null, 2),
+            "\n\n"
+          );
+          const adaBalanceL1 = data.totalInL1[ASSET_UNITS.ada] / 1000000 || 0;
+          const usdmBalanceL1 = data.totalInL1[ASSET_UNITS.usdm] || 0;
+          const adaBalanceL2 = data.totalInL2[ASSET_UNITS.ada] / 1000000 || 0;
+          const usdmBalanceL2 = data.totalInL2[ASSET_UNITS.usdm] || 0;
+
+          setUsdmBalance(() => usdmBalanceL1 + usdmBalanceL2);
+          setAdaBalance(() => adaBalanceL1 + adaBalanceL2);
+
+          setTransactions(() => [...data.fundsInL1, ...data.fundsInL2]);
+
+          console.log("\n\n[ADA-BALANCE]", adaBalanceL1 + adaBalanceL2, "\n\n");
+          console.log(
+            "\n\n[USDM-BALANCE]",
+            usdmBalanceL1 + usdmBalanceL2,
+            "\n\n"
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -137,6 +161,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
         usdmConversionRate,
         selectedCurrency,
         updateSelectedCurrency,
+        transactions,
       }}
     >
       {children}
