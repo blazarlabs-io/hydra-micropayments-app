@@ -36,6 +36,7 @@ import { Camera } from "./Camera";
 import { FlipCamera } from "./FlipCamera";
 import { ChevronLeft } from "./ChevronLeft";
 import { Payment } from "./Payment";
+import { Wbtc } from "./Wbtc";
 
 const Icons = {
   ViewEye,
@@ -76,6 +77,7 @@ const Icons = {
   CameraFrame,
   ChevronLeft,
   Payment,
+  Wbtc,
 };
 
 export { Icons };

@@ -25,7 +25,10 @@
       "permissions": [
         "android.permission.NFC",
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
       ]
     },
     "web": {
@@ -51,6 +54,14 @@
     "androidStatusBar": {
       "backgroundColor": "#ffffff",
       "translucent": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5ba415a6-821d-4004-80b9-c2db733b5a9f"
+      }
     }
   }
 }

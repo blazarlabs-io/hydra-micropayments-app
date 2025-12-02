@@ -212,6 +212,19 @@ export const NfcScreen = () => {
                       </Text>
                     </View>
                   )}
+                  {paymentRequest.assetUnit === ASSET_UNITS.wbtc && (
+                    <View className="flex flex-row items-start justify-center">
+                      <ThemedText
+                        type="title"
+                        className="mt-8 max-w-[70%] text-center"
+                      >
+                        ${paymentRequest.amount / 100000000}
+                      </ThemedText>
+                      <Text className="ml-2 mt-8 max-w-[70%] text-center text-[10px] font-bold opacity-50">
+                        WBTC
+                      </Text>
+                    </View>
+                  )}
                 </>
               )}
             </View>

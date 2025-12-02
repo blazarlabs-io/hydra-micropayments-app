@@ -1,12 +1,14 @@
 import { useWalletRegistration } from "@/hooks/useWalletRegistration";
 import { db } from "@/lib/firebase/client";
-import { getAdaUsdTicker } from "@/services/coinwatch/client";
+import { getAdaUsdTicker, getBtcUsdTicker } from "@/services/coinwatch/client";
 import { doc, onSnapshot } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./authContext";
 import { USERS } from "@/lib/firebase/services/constants";
 import { ASSET_UNITS } from "@/constants/assetUnits";
 import { Transaction } from "@/types/db";
+
+export type CurrencyType = "ADA" | "USDM" | "WBTC";
 
 interface ContextInterface {
   isWalletRegistered: boolean;
@@ -17,8 +19,10 @@ interface ContextInterface {
   adaConversionRate: number;
   usdmBalance: number;
   usdmConversionRate: number;
-  selectedCurrency: "ADA" | "USDM";
-  updateSelectedCurrency: (currency: "ADA" | "USDM") => void;
+  wbtcBalance: number;
+  wbtcConversionRate: number;
+  selectedCurrency: CurrencyType;
+  updateSelectedCurrency: (currency: CurrencyType) => void;
   transactions: Transaction[];
 }
 
@@ -27,8 +31,10 @@ const WalletContext = createContext<ContextInterface>({
   adminWalletAddress: "",
   adaAddress: "",
   adaBalance: 0.0,
+  wbtcBalance: 0.0,
   getBalance: () => {},
   adaConversionRate: 0.35,
+  wbtcConversionRate: 1.0,
   usdmBalance: 0.0,
   usdmConversionRate: 1.0,
   selectedCurrency: "ADA",
@@ -57,14 +63,14 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [adaBalance, setAdaBalance] = useState<number>(640.0);
   const [usdmBalance, setUsdmBalance] = useState<number>(0.0);
-  const [selectedCurrency, setSelectedCurrency] = useState<"ADA" | "USDM">(
-    "ADA"
-  );
+  const [wbtcBalance, setWbtcBalance] = useState<number>(0.0);
+  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyType>("ADA");
   const [adaConversionRate, setAdaConversionRate] = useState<number>(0.35);
   const [usdmConversionRate, setUsdmConversionRate] = useState<number>(1.0);
+  const [wbtcConversionRate, setWbtcConversionRate] = useState<number>(1.0);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  const updateSelectedCurrency = (currency: "ADA" | "USDM") => {
+  const updateSelectedCurrency = (currency: CurrencyType) => {
     setSelectedCurrency(currency);
   };
 
@@ -97,6 +103,14 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       .catch((error) => {
         console.log(error);
       });
+
+    getBtcUsdTicker()
+      .then((data) => {
+        setWbtcConversionRate(data.rate);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -111,20 +125,26 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
           );
           const adaBalanceL1 = data.totalInL1[ASSET_UNITS.ada] / 1000000 || 0;
           const usdmBalanceL1 = data.totalInL1[ASSET_UNITS.usdm] || 0;
+          const wbtcBalanceL1 = data.totalInL1[ASSET_UNITS.wbtc] || 0;
           const adaBalanceL2 = data.totalInL2[ASSET_UNITS.ada] / 1000000 || 0;
           const usdmBalanceL2 = data.totalInL2[ASSET_UNITS.usdm] || 0;
+          const wbtcBalanceL2 = data.totalInL2[ASSET_UNITS.wbtc] || 0;
 
           setUsdmBalance(() => usdmBalanceL1 + usdmBalanceL2);
           setAdaBalance(() => adaBalanceL1 + adaBalanceL2);
+          setWbtcBalance(() => wbtcBalanceL1 + wbtcBalanceL2);
 
           setTransactions(() => [...data.fundsInL1, ...data.fundsInL2]);
 
-          console.log("\n\n[ADA-BALANCE]", adaBalanceL1 + adaBalanceL2, "\n\n");
+          console.log("\n\n=================================");
+          console.log("[ADA-BALANCE]", adaBalanceL1 + adaBalanceL2);
+          console.log("[USDM-BALANCE]", usdmBalanceL1 + usdmBalanceL2);
           console.log(
-            "\n\n[USDM-BALANCE]",
-            usdmBalanceL1 + usdmBalanceL2,
-            "\n\n"
+            "[WBTC-BALANCE]",
+            (wbtcBalanceL1 + wbtcBalanceL2) / 100000000
           );
+
+          console.log("=================================\n\n");
         })
         .catch((error) => {
           console.log(error);
@@ -159,6 +179,8 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
         adaConversionRate,
         usdmBalance,
         usdmConversionRate,
+        wbtcBalance,
+        wbtcConversionRate,
         selectedCurrency,
         updateSelectedCurrency,
         transactions,
